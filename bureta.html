@@ -1,0 +1,1492 @@
+<!doctype html>
+<html lang="am">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ለበርቱካን ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #e91e63;
+        --primary-dark: #c2185b;
+        --secondary: #ff4081;
+        --gold: #ffd700;
+        --dark: #1a1a2e;
+        --darker: #16213e;
+        --text-light: #f8f0f5;
+        --accent: #ff6b9d;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: var(--dark);
+        color: var(--text-light);
+        overflow-x: hidden;
+        cursor: default;
+      }
+
+      /* Heart Canvas Background */
+      #heartCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      /* Preloader */
+      .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          #1a1a2e 0%,
+          #16213e 50%,
+          #0f3460 100%
+        );
+        z-index: 10000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        transition:
+          opacity 1s ease,
+          visibility 1s ease;
+      }
+
+      .preloader.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .preloader-heart {
+        font-size: 80px;
+        animation: heartPulse 1s ease-in-out infinite;
+      }
+
+      .preloader-text {
+        margin-top: 20px;
+        font-family: "Dancing Script", cursive;
+        font-size: 28px;
+        color: var(--secondary);
+        animation: fadeInOut 2s ease-in-out infinite;
+      }
+
+      @keyframes heartPulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+      }
+
+      @keyframes fadeInOut {
+        0%,
+        100% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      /* Main Content */
+      .main-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(233, 30, 99, 0.15) 0%,
+          transparent 70%
+        );
+        animation: rotateGlow 20s linear infinite;
+      }
+
+      @keyframes rotateGlow {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .hero-heart {
+        font-size: 100px;
+        margin-bottom: 30px;
+        animation: floatHeart 3s ease-in-out infinite;
+        filter: drop-shadow(0 0 30px rgba(233, 30, 99, 0.6));
+      }
+
+      @keyframes floatHeart {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-20px) scale(1.05);
+        }
+      }
+
+      .hero-title {
+        font-family: "Dancing Script", cursive;
+        font-size: clamp(48px, 10vw, 100px);
+        font-weight: 700;
+        background: linear-gradient(
+          135deg,
+          var(--secondary),
+          var(--gold),
+          var(--secondary)
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s ease-in-out infinite;
+        margin-bottom: 20px;
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: 0% center;
+        }
+        50% {
+          background-position: 100% center;
+        }
+        100% {
+          background-position: 0% center;
+        }
+      }
+
+      .hero-subtitle {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(18px, 3vw, 28px);
+        font-weight: 300;
+        color: rgba(248, 240, 245, 0.8);
+        max-width: 600px;
+        line-height: 1.6;
+        opacity: 0;
+        animation: fadeUp 1s ease 0.5s forwards;
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .scroll-indicator {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: bounce 2s ease-in-out infinite;
+        cursor: pointer;
+      }
+
+      .scroll-indicator svg {
+        width: 30px;
+        height: 30px;
+        fill: var(--secondary);
+        opacity: 0.7;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          transform: translateX(-50%) translateY(10px);
+        }
+      }
+
+      /* Sections */
+      section {
+        padding: 100px 20px;
+        position: relative;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        font-family: "Dancing Script", cursive;
+        font-size: clamp(36px, 6vw, 60px);
+        text-align: center;
+        margin-bottom: 60px;
+        color: var(--secondary);
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--secondary),
+          transparent
+        );
+        margin: 15px auto 0;
+      }
+
+      /* Love Letter Section */
+      .love-letter {
+        background: linear-gradient(
+          135deg,
+          rgba(233, 30, 99, 0.05) 0%,
+          rgba(255, 64, 129, 0.05) 100%
+        );
+        border-radius: 30px;
+        padding: 60px 40px;
+        max-width: 800px;
+        margin: 0 auto;
+        border: 1px solid rgba(233, 30, 99, 0.2);
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1s ease;
+      }
+
+      .love-letter.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .love-letter::before {
+        content: "💌";
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 40px;
+        opacity: 0.3;
+      }
+
+      .letter-content {
+        font-family: "Playfair Display", serif;
+        font-size: 18px;
+        line-height: 2;
+        color: rgba(248, 240, 245, 0.9);
+        text-align: center;
+      }
+
+      .letter-content p {
+        margin-bottom: 20px;
+      }
+
+      .letter-signature {
+        font-family: "Dancing Script", cursive;
+        font-size: 28px;
+        color: var(--secondary);
+        margin-top: 30px;
+        text-align: right;
+      }
+
+      /* Reasons Section */
+      .reasons-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .reason-card {
+        background: linear-gradient(
+          135deg,
+          rgba(233, 30, 99, 0.1) 0%,
+          rgba(255, 64, 129, 0.05) 100%
+        );
+        border-radius: 20px;
+        padding: 40px 30px;
+        text-align: center;
+        border: 1px solid rgba(233, 30, 99, 0.15);
+        transition: all 0.5s ease;
+        opacity: 0;
+        transform: translateY(30px);
+        backdrop-filter: blur(5px);
+      }
+
+      .reason-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .reason-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--secondary);
+        box-shadow: 0 20px 40px rgba(233, 30, 99, 0.2);
+      }
+
+      .reason-icon {
+        font-size: 50px;
+        margin-bottom: 20px;
+        display: block;
+      }
+
+      .reason-title {
+        font-family: "Dancing Script", cursive;
+        font-size: 24px;
+        color: var(--secondary);
+        margin-bottom: 15px;
+      }
+
+      .reason-text {
+        font-size: 15px;
+        line-height: 1.8;
+        color: rgba(248, 240, 245, 0.7);
+      }
+
+      /* Timeline Section */
+      .timeline {
+        position: relative;
+        padding: 20px 0;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          var(--secondary),
+          transparent
+        );
+      }
+
+      .timeline-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 60px;
+        position: relative;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease;
+      }
+
+      .timeline-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .timeline-item:nth-child(odd) {
+        flex-direction: row;
+      }
+
+      .timeline-item:nth-child(even) {
+        flex-direction: row-reverse;
+      }
+
+      .timeline-content {
+        width: 40%;
+        padding: 30px;
+        background: linear-gradient(
+          135deg,
+          rgba(233, 30, 99, 0.1) 0%,
+          rgba(255, 64, 129, 0.05) 100%
+        );
+        border-radius: 20px;
+        border: 1px solid rgba(233, 30, 99, 0.15);
+        backdrop-filter: blur(5px);
+        transition: all 0.5s ease;
+      }
+
+      .timeline-content:hover {
+        border-color: var(--secondary);
+        box-shadow: 0 10px 30px rgba(233, 30, 99, 0.15);
+      }
+
+      .timeline-dot {
+        width: 20px;
+        height: 20px;
+        background: var(--secondary);
+        border-radius: 50%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 0 20px rgba(233, 30, 99, 0.5);
+      }
+
+      .timeline-date {
+        font-family: "Dancing Script", cursive;
+        font-size: 22px;
+        color: var(--gold);
+        margin-bottom: 10px;
+      }
+
+      .timeline-text {
+        font-size: 15px;
+        line-height: 1.8;
+        color: rgba(248, 240, 245, 0.8);
+      }
+
+      /* Gallery Section */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .gallery-item {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        aspect-ratio: 1;
+        background: linear-gradient(
+          135deg,
+          rgba(233, 30, 99, 0.2) 0%,
+          rgba(255, 64, 129, 0.1) 100%
+        );
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.5s ease;
+        opacity: 0;
+        transform: scale(0.9);
+        border: 1px solid rgba(233, 30, 99, 0.15);
+      }
+
+      .gallery-item.visible {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .gallery-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 35px rgba(233, 30, 99, 0.3);
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.5s ease;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.1);
+      }
+
+      .gallery-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background: linear-gradient(transparent, rgba(26, 26, 46, 0.95));
+        transform: translateY(100%);
+        transition: transform 0.5s ease;
+      }
+
+      .gallery-item:hover .gallery-overlay {
+        transform: translateY(0);
+      }
+
+      .gallery-text {
+        font-family: "Dancing Script", cursive;
+        font-size: 20px;
+        color: var(--secondary);
+      }
+
+      /* Counter Section */
+      .counter-section {
+        text-align: center;
+        padding: 80px 20px;
+      }
+
+      .counter-grid {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        flex-wrap: wrap;
+        margin-top: 40px;
+      }
+
+      .counter-item {
+        text-align: center;
+      }
+
+      .counter-number {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(48px, 8vw, 80px);
+        font-weight: 700;
+        color: var(--secondary);
+        text-shadow: 0 0 30px rgba(233, 30, 99, 0.3);
+      }
+
+      .counter-label {
+        font-family: "Dancing Script", cursive;
+        font-size: 22px;
+        color: rgba(248, 240, 245, 0.7);
+        margin-top: 10px;
+      }
+
+      /* Promise Section */
+      .promises {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .promise-item {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 25px 30px;
+        background: linear-gradient(
+          135deg,
+          rgba(233, 30, 99, 0.08) 0%,
+          rgba(255, 64, 129, 0.05) 100%
+        );
+        border-radius: 15px;
+        border-left: 4px solid var(--secondary);
+        transition: all 0.5s ease;
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+
+      .promise-item.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .promise-item:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(233, 30, 99, 0.15) 0%,
+          rgba(255, 64, 129, 0.08) 100%
+        );
+        transform: translateX(10px);
+      }
+
+      .promise-icon {
+        font-size: 30px;
+        flex-shrink: 0;
+      }
+
+      .promise-text {
+        font-family: "Playfair Display", serif;
+        font-size: 17px;
+        line-height: 1.6;
+        color: rgba(248, 240, 245, 0.85);
+      }
+
+      /* Final Section */
+      .final-section {
+        min-height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        position: relative;
+      }
+
+      .final-heart {
+        font-size: 150px;
+        animation: finalPulse 2s ease-in-out infinite;
+        filter: drop-shadow(0 0 50px rgba(233, 30, 99, 0.8));
+      }
+
+      @keyframes finalPulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.15);
+        }
+      }
+
+      .final-text {
+        font-family: "Dancing Script", cursive;
+        font-size: clamp(36px, 6vw, 70px);
+        background: linear-gradient(
+          135deg,
+          var(--secondary),
+          var(--gold),
+          var(--secondary)
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s ease-in-out infinite;
+        margin-top: 30px;
+      }
+
+      .final-subtext {
+        font-family: "Playfair Display", serif;
+        font-size: 20px;
+        color: rgba(248, 240, 245, 0.7);
+        margin-top: 20px;
+        max-width: 500px;
+      }
+
+      /* Chat / Message Board Section (NEW CSS) */
+      .message-board {
+        max-width: 800px;
+        margin: 0 auto;
+        background: linear-gradient(
+          135deg,
+          rgba(233, 30, 99, 0.05) 0%,
+          rgba(255, 64, 129, 0.05) 100%
+        );
+        border-radius: 30px;
+        padding: 40px;
+        border: 1px solid rgba(233, 30, 99, 0.2);
+        backdrop-filter: blur(10px);
+      }
+
+      .chat-container {
+        max-height: 400px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        /* Scrollbar styling for chat */
+        scrollbar-width: thin;
+        scrollbar-color: var(--secondary) transparent;
+      }
+
+      .chat-container::-webkit-scrollbar {
+        width: 6px;
+      }
+      .chat-container::-webkit-scrollbar-thumb {
+        background-color: var(--secondary);
+        border-radius: 10px;
+      }
+
+      .message {
+        padding: 15px 20px;
+        border-radius: 20px;
+        max-width: 80%;
+        word-wrap: break-word;
+      }
+
+      .message.ermias {
+        background: rgba(233, 30, 99, 0.2);
+        align-self: flex-start;
+        border-bottom-left-radius: 5px;
+      }
+
+      .message.birtukan {
+        background: rgba(255, 215, 0, 0.2);
+        align-self: flex-end;
+        border-bottom-right-radius: 5px;
+      }
+
+      .message-name {
+        font-size: 12px;
+        opacity: 0.7;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .message-text {
+        font-family: "Playfair Display", serif;
+        font-size: 16px;
+      }
+
+      .message-form {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .message-input {
+        flex: 1;
+        min-width: 200px;
+        padding: 15px;
+        border-radius: 15px;
+        border: 1px solid rgba(233, 30, 99, 0.3);
+        background: rgba(26, 26, 46, 0.6);
+        color: var(--text-light);
+        font-family: "Poppins", sans-serif;
+      }
+
+      .sender-select {
+        padding: 15px;
+        border-radius: 15px;
+        border: 1px solid rgba(233, 30, 99, 0.3);
+        background: rgba(26, 26, 46, 0.6);
+        color: var(--text-light);
+        font-family: "Poppins", sans-serif;
+      }
+
+      .send-btn {
+        padding: 15px 30px;
+        border-radius: 15px;
+        border: none;
+        background: var(--secondary);
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .send-btn:hover {
+        background: var(--primary);
+        transform: scale(1.05);
+      }
+
+      /* Floating Hearts */
+      .floating-heart {
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        animation: floatUp 4s ease-in forwards;
+        font-size: 24px;
+      }
+
+      @keyframes floatUp {
+        0% {
+          opacity: 1;
+          transform: translateY(0) rotate(0deg) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-100vh) rotate(720deg) scale(0);
+        }
+      }
+
+      /* Music Toggle */
+      .music-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(233, 30, 99, 0.2);
+        border: 2px solid var(--secondary);
+        color: var(--secondary);
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+
+      .music-toggle:hover {
+        background: var(--secondary);
+        color: white;
+        transform: scale(1.1);
+      }
+
+      .music-toggle.playing {
+        animation: musicPulse 1s ease-in-out infinite;
+      }
+
+      @keyframes musicPulse {
+        0%,
+        100% {
+          box-shadow: 0 0 0 0 rgba(233, 30, 99, 0.4);
+        }
+        50% {
+          box-shadow: 0 0 0 15px rgba(233, 30, 99, 0);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .timeline::before {
+          left: 20px;
+        }
+
+        .timeline-item {
+          flex-direction: column !important;
+          align-items: flex-start;
+          padding-left: 50px;
+        }
+
+        .timeline-content {
+          width: 100%;
+        }
+
+        .timeline-dot {
+          left: 20px;
+          transform: translateX(-50%);
+        }
+
+        .counter-grid {
+          gap: 20px;
+        }
+
+        .love-letter {
+          padding: 40px 25px;
+        }
+
+        .reasons-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Sparkle cursor effect */
+      .sparkle {
+        position: fixed;
+        pointer-events: none;
+        z-index: 9998;
+        width: 10px;
+        height: 10px;
+        background: var(--secondary);
+        border-radius: 50%;
+        animation: sparkleFade 0.8s ease forwards;
+      }
+
+      @keyframes sparkleFade {
+        0% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0);
+        }
+      }
+
+      /* Particles */
+      .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: var(--secondary);
+        border-radius: 50%;
+        opacity: 0.3;
+        animation: particleFloat 15s linear infinite;
+      }
+
+      @keyframes particleFloat {
+        0% {
+          transform: translateY(100vh) translateX(0) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.3;
+        }
+        90% {
+          opacity: 0.3;
+        }
+        100% {
+          transform: translateY(-100vh) translateX(100px) rotate(720deg);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+      <div class="preloader-heart">✨</div>
+      <div class="preloader-text">ለውቢት የተስራው ዌብሳይት እየከፈተ ነው...</div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Heart Canvas -->
+    <canvas id="heartCanvas"></canvas>
+
+    <!-- Music Toggle -->
+    <button class="music-toggle" id="musicToggle" title="ሙዚቃ አጫውት/አቁም">
+      🎵
+    </button>
+    <!-- Audio element -->
+    <audio id="bgMusic" src="wa_q4XqgKbS.mp3"></audio>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-heart">✨</div>
+        <h1 class="hero-title">ለቡርትዬ</h1>
+        <p class="hero-subtitle">
+          የዛሬ አመት፣ ክፍል ውስጥ ተገናኝተን በጥሩ ወዳጅነት እስካሁን ☺️ ✨
+        </p>
+        <div
+          class="scroll-indicator"
+          onclick="
+            document
+              .getElementById('letter')
+              .scrollIntoView({ behavior: 'smooth' })
+          "
+        >
+          <svg viewBox="0 0 24 24">
+            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+          </svg>
+        </div>
+      </section>
+
+      <!-- Love Letter Section -->
+      <section id="letter">
+        <div class="container">
+          <h2 class="section-title">ላንቺ የተፃፈ (ላንቺ ለፀሐዬ🙈🍊)</h2>
+          <div class="love-letter" id="loveLetter">
+            <div class="letter-content">
+              <p>የክፍላችን በጣም ቆንጅዬ ልጅ ስለምታወራኝ በጣም ደስተኛ ነኝ ☺️።</p>
+              <p>
+                ታውቂያለሸ ያንቺን ነገር ሳስበው ይገርመኛል ባገኘሸው ነግር ነው የምትደሰቺው አና ፈገግታሽ በጣም ነው
+                የሚያምረው፡፡
+              </p>
+              <p>
+                እና ደግሞ ይሄን ትንሽ ዌብሳይት፣ ላንቺ ክብር ስል ሰራሁት፡፡<br />
+                ልክ እንደምትወጂው ችኮሌት እና እስፔሻል ሻይ ውብ የሆን ሕይወት ይኑርሸ፡፡
+              </p>
+              <p>
+                እና ደግሞ ይሄንን ውብ ፈገግታሽን ደበቅ እያደረግሽው ወንዶቹን ያደነዝዛቸዋል<br />
+                ደብዳቤ መፃፍ ነበር ሃሳቤ😁 ግን እንደምታይየው ዝብርቅርቅ ያለ ሃሳብ ነው የፃፍኩት ለዛ ደግሞ
+                ይቅርታ🙏
+              </p>
+              <div class="letter-signature">ቡርትዬ ሁሌም ደስተኛ ሁኚልኝ ✨🍊</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reasons Section -->
+      <section id="reasons">
+        <div class="container">
+          <h2 class="section-title">ካንቺ ጋር ማውራት ደስ የሚልባቸው ምክንያቶች</h2>
+          <div class="reasons-grid">
+            <div class="reason-card" data-delay="0">
+              <span class="reason-icon">🍊</span>
+              <h3 class="reason-title">ድንዝዝ የሚያደርገው ፈገግታሽ</h3>
+              <p class="reason-text">
+                በእነዛ ውብ እና ገዳይ በሆኑት ጥርሶችሽ ፈገግ ስትይ ሙክክ ነው የምለው☺️
+              </p>
+            </div>
+            <div class="reason-card" data-delay="100">
+              <span class="reason-icon">☕</span>
+              <h3 class="reason-title">የሻይ ፍቅር</h3>
+              <p class="reason-text">
+                ሳስበው ሳስበው ለሻይ ያለሽ ፍቅር የመስለኛል ትዳር እንዳትፈልጊ የሚያደርግሸ
+              </p>
+            </div>
+            <div class="reason-card" data-delay="200">
+              <span class="reason-icon">🍫</span>
+              <h3 class="reason-title">ቸኮሌት ጣዕም</h3>
+              <p class="reason-text">
+                እኔ እኮ ግርም የሚለኝ ለቸኮሌት ችኮሌት ምን ይሰራለታል ጣዕምሽ እራሱ ቸኮሌት ቸኮሌት ነው የሚለው
+                🙈 በምን አወክ እንዳትዩኝ ሚስጢር ነው፡፡
+              </p>
+            </div>
+            <div class="reason-card" data-delay="300">
+              <span class="reason-icon">💫</span>
+              <h3 class="reason-title">ጥሩ ተጫዋችነትሽ</h3>
+              <p class="reason-text">
+                እኔን እንደ ቆየ ጓደኛ በነፃነት ማውራት መቻልሽ እና የምታሽኮረምሚውን ነገርና ተጫዋችነትሽ
+                እወደዋለሁ።
+              </p>
+            </div>
+            <div class="reason-card" data-delay="500">
+              <span class="reason-icon">🍊</span>
+              <h3 class="reason-title">የማሽኮረመም ችሎታሽ</h3>
+              <p class="reason-text">
+                የሆነ እስካሁን ያልነገርሺኝ መርጌታ ጋርማ ሄደሻል እንጂ እኔ እንደዚህ በቀላሉ የምሽኮረመም ሰው
+                አልነበርኩም😁
+              </p>
+            </div>
+            <div class="reason-card" data-delay="500">
+              <span class="reason-icon">🍲</span>
+              <h3 class="reason-title">የምግብ ሞያሽ</h3>
+              <p class="reason-text">
+                ሲጀምር ለምን ብርሸን ታባክኛለሽ ያለሽ የምግብ ሞያ እኮ ከአስተማሪዎቹ ይበልጣል
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Timeline Section -->
+      <section id="timeline">
+        <div class="container">
+          <h2 class="section-title">የጓደኝነታችን አጀማመር</h2>
+          <div class="timeline">
+            <div class="timeline-item" data-delay="0">
+              <div class="timeline-content">
+                <div class="timeline-date">የተዋወቅንበት ቀን ☕</div>
+                <p class="timeline-text">
+                  ህዳር 3 ነበር ትምህርት የጀመርነው ከዛ ህዳር 5 ለክፍል ተጠሪነት ተመረጥን🥳 የዛን እለት ነበር
+                  ነበር ያየሁሽ
+                </p>
+              </div>
+              <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item" data-delay="100">
+              <div class="timeline-content">
+                <div class="timeline-date">የቸኮሌት ቅምሻ 🍫</div>
+                <p class="timeline-text">የቸኮሌቱን ጉዳይ ከላይ እንዳወራነው ነው እሺ🙈</p>
+              </div>
+              <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item" data-delay="200">
+              <div class="timeline-content">
+                <div class="timeline-date">የፈገግታ ጥበብ 😊</div>
+                <p class="timeline-text">
+                  ስሞኑን የሆነ ዶክተር አጊቼ ነበር እና ምን አለኝ መሰለሽ በየ ቀኑ ቡርቴ ካልሳቀችልህ ትሞታለህ
+                  ብሎኛል እና አስቢበት🙈
+                </p>
+              </div>
+              <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item" data-delay="300">
+              <div class="timeline-content">
+                <div class="timeline-date">የተጫዋችነት ጥበብ 🚀</div>
+                <p class="timeline-text">ስለ ጨዋታሽ ምንም ማለት አልችልም ከቃላት በላይ 🥰</p>
+              </div>
+              <div class="timeline-dot"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery Section -->
+      <section id="gallery">
+        <div class="container">
+          <h2 class="section-title">ድንዝዝ የሚያደርጉ ፎቶዎችሽ</h2>
+          <div class="gallery-grid">
+            <div class="gallery-item" data-delay="0">
+              <img
+                src="1.jpg"
+                alt="Birtukan smile"
+                style="width: 100%; height: 100%; object-fit: cover"
+              />
+              <div class="gallery-overlay">
+                <p class="gallery-text">ድንዝዝ የምታደርግ አስተያየት🙈</p>
+              </div>
+            </div>
+            <div class="gallery-item" data-delay="100">
+              <img
+                src="3.jpg"
+                alt="Birtukan playful"
+                style="width: 100%; height: 100%; object-fit: cover"
+              />
+              <div class="gallery-overlay">
+                <p class="gallery-text">ድንዝዝ የሚያደርጉ ጥቶች🙄</p>
+              </div>
+            </div>
+            <div class="gallery-item" data-delay="200">
+              <img
+                src="2.jpg"
+                alt="Birtukan portrait"
+                style="width: 100%; height: 100%; object-fit: cover"
+              />
+              <div class="gallery-overlay">
+                <p class="gallery-text">ድንዝዝ የምታደርግ የሚያደርግ የፎቶ አነሳስ</p>
+              </div>
+            </div>
+            <div class="gallery-item" data-delay="300">
+              <img
+                src="4.jpg"
+                alt="Birtukan traditional"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  object-position: center top;
+                "
+              />
+              <div class="gallery-overlay">
+                <p class="gallery-text">ድንዝዝ የምታደርግ ውበት</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Counter Section -->
+      <section class="counter-section">
+        <div class="container">
+          <h2 class="section-title">በደንብ ማውራት ከጀመርን</h2>
+          <div class="counter-grid">
+            <div class="counter-item">
+              <div class="counter-number" id="days">0</div>
+              <div class="counter-label">ቀናት</div>
+            </div>
+            <div class="counter-item">
+              <div class="counter-number" id="hours">0</div>
+              <div class="counter-label">ሰዓታት</div>
+            </div>
+            <div class="counter-item">
+              <div class="counter-number" id="minutes">0</div>
+              <div class="counter-label">ደቂቃዎች</div>
+            </div>
+            <div class="counter-item">
+              <div class="counter-number" id="seconds">0</div>
+              <div class="counter-label">ሰከንዶች</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Promises Section -->
+      <section id="promises">
+        <div class="container">
+          <h2 class="section-title">ስለ ሁለታችን ያለኝ ሃሳብ እና ቃል የምገባቸው ነገሮች</h2>
+          <div class="promises">
+            <div class="promise-item" data-delay="0">
+              <span class="promise-icon">🤝</span>
+              <p class="promise-text">
+                ሁሌም ጥሩ አዳማጭ ለመሆን ቃል እገባለሁ፡፡😁 ወሬ ሰለምወድ አይደለም እሺ
+              </p>
+            </div>
+            <div class="promise-item" data-delay="100">
+              <span class="promise-icon">😊</span>
+              <p class="promise-text">ሁሌም ፈገግ እንድትዩ ለማድረግ የአቅሜን እሞክራለሁ</p>
+            </div>
+            <div class="promise-item" data-delay="200">
+              <span class="promise-icon">🌟</span>
+              <p class="promise-text">ይሄንን ፀሐይ ለምኔ የሆነውን ውበትሽን ደግሞ በደንብ ጠብቂው</p>
+            </div>
+            <div class="promise-item" data-delay="400">
+              <span class="promise-icon">✨</span>
+              <p class="promise-text">
+                አሁን ላይ ያለንን መግባባት አሁን ላይ ያለንን ወሬ በጣም ነው የወደድኩት
+              </p>
+            </div>
+            <div class="promise-item" data-delay="400">
+              <span class="promise-icon">🗨️</span>
+              <p class="promise-text">
+                እስካሁን በነበረን ጊዜ ሳላውቀው ካስቀየምኩሽ ከዚህ በሆላም ድንገት ሳላውቀው ካስቀየምኩሸ ከልቤ እጅግ
+                በጣም ይቅርታ
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Message Board Section (NEW) -->
+      <section id="message-board">
+        <div class="container">
+          <h2 class="section-title">የልብ መልዕክቶች 💌</h2>
+          <div class="message-board">
+            <div class="chat-container" id="chatContainer">
+              <!-- Messages will appear here -->
+            </div>
+            <form class="message-form" id="messageForm">
+              <select class="sender-select" id="senderSelect">
+                <option value="ermias">ኤርሚያስ</option>
+                <option value="birtukan">ቡርትዬ</option>
+              </select>
+              <input
+                type="text"
+                class="message-input"
+                id="messageInput"
+                placeholder="መልዕክትዎን እዚህ ይፃፉ..."
+                required
+              />
+              <button type="submit" class="send-btn">ላክ ✨</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Final Section -->
+      <section class="final-section">
+        <div class="final-heart">✨</div>
+        <h2 class="final-text">ቡርትዬ አንቺን የሚገልፁ የመፅሐፍ ቅዱስ ጥቅሶች ናችው</h2>
+        <p class="final-subtext">
+          "ልባም (መልካም) ሴትን ማን ሊያገኛት ይችላል? ዋጋዋ ከቀይ ዕንቍ እጅግ ይበልጣል።" ምፅሐፈ ተግሳፅ
+          7፥10✨
+        </p>
+        <p class="final-subtext">
+          ""ብዙዎች ሴቶች መልካም አደረጉ፥ አንቺ ግን ከሁሉ ትበልጫለሽ..." ምፅሐፈ ተግሳፅ 7፥29✨
+        </p>
+      </section>
+    </div>
+
+    <script>
+      // Preloader
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          document.getElementById("preloader").classList.add("hidden");
+        }, 2000);
+      });
+
+      // Heart Canvas Animation
+      const canvas = document.getElementById("heartCanvas");
+      const ctx = canvas.getContext("2d");
+      let hearts = [];
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+
+      class Heart {
+        constructor() {
+          this.reset();
+        }
+
+        reset() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height + canvas.height;
+          this.size = Math.random() * 3 + 1;
+          this.speedY = Math.random() * 1 + 1;
+          this.speedX = (Math.random() - 0.5) * 0.5;
+          this.opacity = Math.random() * 0.5 + 0.1;
+        }
+
+        update() {
+          this.y -= this.speedY;
+          this.x += this.speedX;
+          if (this.y < -10) {
+            this.reset();
+            this.y = canvas.height + 10;
+          }
+        }
+
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(233, 30, 99, ${this.opacity})`;
+          ctx.fill();
+        }
+      }
+
+      for (let i = 0; i < 50; i++) {
+        hearts.push(new Heart());
+      }
+
+      function animateHearts() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        hearts.forEach((heart) => {
+          heart.update();
+          heart.draw();
+        });
+        requestAnimationFrame(animateHearts);
+      }
+      animateHearts();
+
+      // Scroll Animations using Intersection Observer
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const delay = Number(entry.target.getAttribute("data-delay")) || 0;
+            setTimeout(() => {
+              entry.target.classList.add("visible");
+            }, delay);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      const animatedElements = document.querySelectorAll(
+        ".love-letter, .reason-card, .timeline-item, .gallery-item, .promise-item",
+      );
+      animatedElements.forEach((el) => observer.observe(el));
+
+      // Counter Logic
+      const startDate = new Date(2026, 5, 23);
+
+      function updateCounter() {
+        const now = new Date();
+        const difference = now - startDate;
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(difference / (1000 * 60 * 60));
+        const minutes = Math.floor(difference / (1000 * 60));
+        const seconds = Math.floor(difference / 1000);
+
+        document.getElementById("days").innerText = days;
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = minutes;
+        document.getElementById("seconds").innerText = seconds;
+      }
+
+      setInterval(updateCounter, 1000);
+      updateCounter();
+
+      // Sparkle Cursor Effect
+      document.addEventListener("mousemove", (e) => {
+        if (Math.random() > 0.8) {
+          const sparkle = document.createElement("div");
+          sparkle.className = "sparkle";
+          sparkle.style.left = e.pageX + "px";
+          sparkle.style.top = e.pageY + "px";
+          document.body.appendChild(sparkle);
+
+          setTimeout(() => {
+            sparkle.remove();
+          }, 800);
+        }
+      });
+
+      // Floating Particles Background
+      const particlesContainer = document.getElementById("particles");
+      for (let i = 0; i < 40; i++) {
+        const particle = document.createElement("div");
+        particle.className = "particle";
+        particle.style.left = Math.random() * 100 + "vw";
+        particle.style.animationDelay = Math.random() * 15 + "s";
+        particle.style.animationDuration = Math.random() * 10 + 10 + "s";
+        particlesContainer.appendChild(particle);
+      }
+
+      // Music Toggle
+      const musicToggle = document.getElementById("musicToggle");
+      const bgMusic = document.getElementById("bgMusic");
+      let isPlaying = false;
+
+      musicToggle.addEventListener("click", () => {
+        if (isPlaying) {
+          bgMusic.pause();
+          musicToggle.classList.remove("playing");
+          musicToggle.innerText = "🎵";
+        } else {
+          bgMusic.play();
+          musicToggle.classList.add("playing");
+          musicToggle.innerText = "⏸️";
+        }
+        isPlaying = !isPlaying;
+      });
+
+      // Floating Hearts on Click
+      document.body.addEventListener("click", (e) => {
+        if (e.target === musicToggle || e.target.closest("#messageForm"))
+          return;
+
+        const heart = document.createElement("div");
+        heart.className = "floating-heart";
+        const emojis = ["✨", "🦋", "📱", "😊", "💬"];
+        heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        heart.style.left = e.clientX - 12 + "px";
+        heart.style.top = e.clientY - 12 + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 4000);
+      });
+
+      // Chat / Message Board Logic
+      const messageForm = document.getElementById("messageForm");
+      const messageInput = document.getElementById("messageInput");
+      const senderSelect = document.getElementById("senderSelect");
+      const chatContainer = document.getElementById("chatContainer");
+
+      // Delete previously sent messages and start fresh
+      localStorage.removeItem("birtukanMessages");
+      let messages = [];
+
+      function renderMessages() {
+        chatContainer.innerHTML = "";
+        messages.forEach((msg) => {
+          const msgDiv = document.createElement("div");
+          msgDiv.className = `message ${msg.sender}`;
+          msgDiv.innerHTML = `
+            <div class="message-name">${msg.sender === "ermias" ? "ኤርሚያስ" : "ቡርትዬ"}</div>
+            <div class="message-text">${msg.text}</div>
+          `;
+          chatContainer.appendChild(msgDiv);
+        });
+        chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to bottom
+      }
+
+      messageForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const text = messageInput.value.trim();
+        if (text) {
+          const newMessage = {
+            sender: senderSelect.value,
+            text: text,
+            timestamp: new Date().getTime(),
+          };
+          messages.push(newMessage);
+          localStorage.setItem("birtukanMessages", JSON.stringify(messages));
+          renderMessages();
+          messageInput.value = "";
+        }
+      });
+
+      // Initial render
+      renderMessages();
+    </script>
+  </body>
+</html>
